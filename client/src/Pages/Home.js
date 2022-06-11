@@ -1,8 +1,11 @@
 import {usePosts} from '../Context/postContext'
-import {Link} from 'react-router-dom'
+import { useEffect } from 'react'
 
 export function Home() {
-  const {setPosts} = usePosts()
+  const {getPosts, posts} = usePosts()
+  useEffect ( () => {
+    getPosts()
+  }, [])
   return (
     <div>Home
     </div>

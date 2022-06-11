@@ -1,4 +1,5 @@
 import { useState, useContext, createContext } from "react"
+import {getPostsRequests} from '../api/posts'
 
 const postContext = createContext()
 
@@ -8,13 +9,18 @@ export const usePosts = () => {
 }
 
 export const PostProvider = ({children}) => {
+
     const [posts, setPosts] = useState([])
+
+    const getPosts = async () => {
+        const res = await getPostsRequests()
+        setPosts(res.data)
+    }
+
     console.log('container log')
     return <postContext.Provider value={{
         posts, 
-        setPosts,
-        uno: 1,
-        dos: 2
+        getPosts
         }}>
         {children}
     </postContext.Provider>
